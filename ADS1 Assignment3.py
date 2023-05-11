@@ -53,19 +53,18 @@ def data_Fitting_plot(indicator, title, ylabel, image):
     popt, pcorr = opt.curve_fit(logistics, data_T["Years"], data_T["CHN"],
                                 p0=(1.2e8, 0.2, 2003.0))
     data_T["exp"] = logistics(data_T["Years"], *popt)
-    plt.figure(figsize=(8,8),dpi=300)
+    plt.figure(figsize=(8, 8), dpi=300)
     plt.plot(data_T["Years"], data_T["CHN"], label="CHINA")
     plt.plot(data_T["Years"], data_T["exp"], label="fit")
-    plt.title(title,fontsize=14)
-    plt.xlabel('Years',fontsize=14)
-    plt.ylabel(ylabel,fontsize=14)
+    plt.title(title, fontsize=14)
+    plt.xlabel('Years', fontsize=14)
+    plt.ylabel(ylabel, fontsize=14)
     plt.xticks(fontsize=14)
     plt.yticks(fontsize=14)
     plt.legend(fontsize=14)
     plt.savefig(image)
     plt.show()
     return
-    
 
 
 def data_prediction(indicator, title, ylabel, image):
@@ -77,12 +76,12 @@ def data_prediction(indicator, title, ylabel, image):
                                 p0=(1.2e8, 0.2, 2003.0))
     year = np.arange(1960, 2031)
     forecast = logistics(year, *popt)
-    plt.figure(figsize=(8,8),dpi=300)
+    plt.figure(figsize=(8, 8), dpi=300)
     plt.plot(data_T["Years"], data_T["CHN"], label="CHINA")
     plt.plot(year, forecast, label="forecast")
-    plt.title(title,fontsize=14)
-    plt.xlabel('Years',fontsize=14)
-    plt.ylabel(ylabel,fontsize=14)
+    plt.title(title, fontsize=14)
+    plt.xlabel('Years', fontsize=14)
+    plt.ylabel(ylabel, fontsize=14)
     plt.xticks(fontsize=14)
     plt.yticks(fontsize=14)
     plt.legend(fontsize=14)
@@ -105,13 +104,13 @@ def data_ErrorRange_plot(indicator,  title, ylabel, image):
     # create extended year range
     years = np.arange(1960, 2030)
     lower, upper = err.err_ranges(years, logistics, popt, sigmas)
-    plt.figure(figsize=(8,8),dpi=300)
+    plt.figure(figsize=(8, 8), dpi=300)
     plt.plot(data_T["Years"], data_T["CHN"], label="CHINA")
     plt.plot(data_T["Years"], data_T["logistics"], label="fit")
     plt.fill_between(years, lower, upper, alpha=0.5)
-    plt.title(title,fontsize=14)
-    plt.xlabel('Years',fontsize=14)
-    plt.ylabel(ylabel,fontsize=14)
+    plt.title(title, fontsize=14)
+    plt.xlabel('Years', fontsize=14)
+    plt.ylabel(ylabel, fontsize=14)
     plt.xticks(fontsize=14)
     plt.yticks(fontsize=14)
     plt.legend(loc="upper left", fontsize=14)
@@ -138,28 +137,28 @@ def clustering(indicator, title, image):
     xcen = cen[:, 0]
     ycen = cen[:, 1]
     # cluster by cluster
-    plt.figure(figsize=(8.0, 8.0),dpi=300)
+    plt.figure(figsize=(8.0, 8.0), dpi=300)
     cm = plt.cm.get_cmap('tab10')
     plt.scatter(df_norm['1990 [YR1990]'],
                 df_norm['2020 [YR2020]'], 40, labels, marker="o", cmap=cm)
     plt.scatter(xcen, ycen, 65, "k", marker="d")
-    plt.title(title,fontsize=14)
-    plt.xlabel("1990)",fontsize=14)
-    plt.ylabel("2015)",fontsize=14)
+    plt.title(title, fontsize=14)
+    plt.xlabel("1990)", fontsize=14)
+    plt.ylabel("2015)", fontsize=14)
 
     # Applying the backscale function to convert the cluster centre
     scen = ct.backscale(cen, df_min, df_max)
     xcen = scen[:, 0]
     ycen = scen[:, 1]
     # cluster by cluster
-    plt.figure(figsize=(8.0, 8.0),dpi=300)
+    plt.figure(figsize=(8.0, 8.0), dpi=300)
     cm = plt.cm.get_cmap('tab10')
     plt.scatter(df_ex['1990 [YR1990]'], df_ex['2020 [YR2020]'],
                 40, labels, marker="o", cmap=cm)
     plt.scatter(xcen, ycen, 65, "k", marker="d")
-    plt.title(title,fontsize=14)
-    plt.xlabel("1990)",fontsize=14)
-    plt.ylabel("2015)",fontsize=14)
+    plt.title(title, fontsize=14)
+    plt.xlabel("1990)", fontsize=14)
+    plt.ylabel("2015)", fontsize=14)
     plt.legend()
     plt.savefig(image)
     plt.show()
@@ -168,12 +167,19 @@ def clustering(indicator, title, image):
 
 if __name__ == "__main__":
     #calling function to visualize all the plots
-    data_Fitting_plot('GDP per capita (current US$)', 'GDP per capita of CHINA', 'GDP per capita (current US$)', 'Fit GDP.jpg')
-    data_prediction('GDP per capita (current US$)', 'GDP per capita prediction for 2030 of CHINA', 'GDP per capita (current US$)', 'Prediction GDP.jpg')
-    data_ErrorRange_plot('GDP per capita (current US$)','GDP per capita Error Ranges for 2030 of CHINA', 'GDP per capita (current US$)', 'Error Ranges GDP.jpg')
-    data_Fitting_plot('Population, total', 'Population of CHINA', 'Population (million)', 'Fit POP.jpg')
-    data_prediction('Population, total','Population prediction for 2030 of CHINA', 'Population (million)', 'Prediction POP.jpg')
-    data_ErrorRange_plot('Population, total', 'Population Error Ranges for 2030 of CHINA', 'Population (million)', 'Error Ranges POP.jpg')
-    clustering('GDP per capita (current US$)', 'GDP Clusters 1990 vs 2020', 'Cluster GDP.jpg')
-    clustering('Population, total', 'Population Clusters 1990 vs 2020', 'Cluster POP.jpg')
-    
+    data_Fitting_plot('GDP per capita (current US$)', 'GDP per capita of CHINA',
+                      'GDP per capita (current US$)', 'Fit GDP.jpg')
+    data_prediction('GDP per capita (current US$)', 'GDP per capita prediction for 2030 of CHINA',
+                    'GDP per capita (current US$)', 'Prediction GDP.jpg')
+    data_ErrorRange_plot('GDP per capita (current US$)', 'GDP per capita Error Ranges for 2030 of CHINA',
+                         'GDP per capita (current US$)', 'Error Ranges GDP.jpg')
+    data_Fitting_plot('Population, total', 'Population of CHINA',
+                      'Population (million)', 'Fit POP.jpg')
+    data_prediction('Population, total', 'Population prediction for 2030 of CHINA',
+                    'Population (million)', 'Prediction POP.jpg')
+    data_ErrorRange_plot('Population, total', 'Population Error Ranges for 2030 of CHINA',
+                         'Population (million)', 'Error Ranges POP.jpg')
+    clustering('GDP per capita (current US$)',
+               'GDP Clusters 1990 vs 2020', 'Cluster GDP.jpg')
+    clustering('Population, total',
+               'Population Clusters 1990 vs 2020', 'Cluster POP.jpg')
