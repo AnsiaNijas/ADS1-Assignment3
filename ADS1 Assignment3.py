@@ -13,7 +13,6 @@ import scipy.optimize as opt
 import errors as err
 import cluster_tools as ct
 import sklearn.cluster as cluster
-import sklearn.metrics as skmet
 
 
 def read_Data(indicator):
@@ -143,8 +142,8 @@ def clustering(indicator, title, image):
                 df_norm['2020 [YR2020]'], 40, labels, marker="o", cmap=cm)
     plt.scatter(xcen, ycen, 65, "k", marker="d")
     plt.title(title, fontsize=14)
-    plt.xlabel("1990)", fontsize=14)
-    plt.ylabel("2015)", fontsize=14)
+    plt.xlabel("1990", fontsize=14)
+    plt.ylabel("2015", fontsize=14)
 
     # Applying the backscale function to convert the cluster centre
     scen = ct.backscale(cen, df_min, df_max)
@@ -157,8 +156,8 @@ def clustering(indicator, title, image):
                 40, labels, marker="o", cmap=cm)
     plt.scatter(xcen, ycen, 65, "k", marker="d")
     plt.title(title, fontsize=14)
-    plt.xlabel("1990)", fontsize=14)
-    plt.ylabel("2015)", fontsize=14)
+    plt.xlabel("1990", fontsize=14)
+    plt.ylabel("2015", fontsize=14)
     plt.legend()
     plt.savefig(image)
     plt.show()
